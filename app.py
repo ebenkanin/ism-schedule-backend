@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['POST'])
 def get_schedule():
     conn = models.connect_to_db()
 
