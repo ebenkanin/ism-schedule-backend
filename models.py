@@ -32,6 +32,7 @@ def connect_to_db():
         if Config.DATABASE_URL:
             conn = psycopg2.connect(Config.DATABASE_URL,connect_timeout=10)
         else:
+            print("DATABASE URL EXISTS:", bool(Config.DATABASE_URL))
             conn = psycopg2.connect(
                 host=Config.DB_PARAMETERS['host'],
                 database=Config.DB_PARAMETERS['database'],
