@@ -45,9 +45,6 @@ def get_schedule():
             "message": f"Could not complete request due to:{str(e)}"
         }), 500
 
-    # except Exception as e:
-    #     return jsonify({"message": f"Could not complete request due to:{str(e)}"}), 500
-
     finally:
         cursor.close()
 
