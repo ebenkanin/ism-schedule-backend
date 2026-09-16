@@ -26,6 +26,8 @@ app = Flask(__name__)
 
 
 def connect_to_db():
+    print("ABOUT TO CONNECT TO DATABASE")
+
     try:
         if Config.DATABASE_URL:
             conn = psycopg2.connect(Config.DATABASE_URL,connect_timeout=10)
@@ -39,6 +41,8 @@ def connect_to_db():
             )
 
         print('Connected to database successfully')
+        print("DATABASE CONNECTION SUCCESSFUL")
+
         return conn
 
     except OperationalError as e:
