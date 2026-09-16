@@ -40,6 +40,7 @@ def test_db():
         cursor.close()
         conn.close()
 
+
 @app.route("/", methods=['POST'])
 def get_schedule():
     conn = models.connect_to_db()
