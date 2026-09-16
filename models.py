@@ -8,19 +8,39 @@ from psycopg2.extras import RealDictCursor
 app = Flask(__name__)
 
 
+# def connect_to_db():
+#     try:
+#         conn = psycopg2.connect(
+#             host=Config.DB_PARAMETERS['host'],
+#             database=Config.DB_PARAMETERS['database'],
+#             user=Config.DB_PARAMETERS['user'],
+#             password=Config.DB_PARAMETERS['password'],
+#             port=Config.DB_PARAMETERS['port']
+#         )
+#         if not conn:
+#             print('Unable to connect to database')
+#         print('Connected to database successfully')
+#         return conn
+#     except OperationalError as e:
+#         print(f"Unable to connect to Database: {e}")
+
+
 def connect_to_db():
     try:
-        conn = psycopg2.connect(
-            host=Config.DB_PARAMETERS['host'],
-            database=Config.DB_PARAMETERS['database'],
-            user=Config.DB_PARAMETERS['user'],
-            password=Config.DB_PARAMETERS['password'],
-            port=Config.DB_PARAMETERS['port']
-        )
-        if not conn:
-            print('Unable to connect to database')
+        if Config.DATABASE_URL:
+            conn = psycopg2.connect(Config.DATABASE_URL)
+        else:
+            conn = psycopg2.connect(
+                host=Config.DB_PARAMETERS['host'],
+                database=Config.DB_PARAMETERS['database'],
+                user=Config.DB_PARAMETERS['user'],
+                password=Config.DB_PARAMETERS['password'],
+                port=Config.DB_PARAMETERS['port']
+            )
+
         print('Connected to database successfully')
         return conn
+
     except OperationalError as e:
         print(f"Unable to connect to Database: {e}")
 
