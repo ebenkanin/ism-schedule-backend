@@ -51,6 +51,17 @@ def get_schedule():
         conn.close()
 
 
+@app.route("/test-db", methods=["GET"])
+def test_db():
+    conn = models.connect_to_db()
+
+    if not conn:
+        return jsonify({"message": "Database connection failed"}), 500
+
+    conn.close()
+    return jsonify({"message": "Database connection successful"})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
