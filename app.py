@@ -19,9 +19,26 @@ def test_db():
     if not conn:
         return jsonify({"message": "Database connection failed"}), 500
 
-    conn.close()
-    return jsonify({"message": "Database connection successful"})
+    cursor = conn.cursor()
 
+    try:
+        cursor.execute("SELECT COUNT(*) FROM schedule")
+        count = cursor.fetchone()[0]
+
+        return jsonify({
+            "message": "Database connection successful",
+            "schedule_records": count
+        })
+
+    except Exception as e:
+        return jsonify({
+            "message": "Database connected, but schedule table test failed",
+            "error": str(e)
+        }), 500
+
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route("/", methods=['POST'])
 def get_schedule():
