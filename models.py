@@ -89,3 +89,4 @@ def create_schedule_table():
             conn.close()
 
 
+create_schedule_table()
