@@ -49,7 +49,8 @@ def create_schedule_table():
                 studio_number VARCHAR(15),
                 shift_date DATE,
                 shift_start TIME,
-                shift_end TIME)
+                shift_end TIME,
+                studio_initials VARCHAR(3))
                 """
             )
             conn.commit()
