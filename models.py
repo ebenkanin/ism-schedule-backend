@@ -28,7 +28,7 @@ app = Flask(__name__)
 def connect_to_db():
     try:
         if Config.DATABASE_URL:
-            conn = psycopg2.connect(Config.DATABASE_URL)
+            conn = psycopg2.connect(Config.DATABASE_URL,connect_timeout=10)
         else:
             conn = psycopg2.connect(
                 host=Config.DB_PARAMETERS['host'],
